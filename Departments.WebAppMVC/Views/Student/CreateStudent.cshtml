@@ -1,0 +1,76 @@
+﻿@model StudentViewModel
+
+@{
+    ViewData["Title"] = "Create student";
+}
+
+<h1>CreateStudent</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <h4>@Html.ValidationMessage("Error")</h4>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Student.Name" class="control-label"></label>
+                <input asp-for="Student.Name" class="form-control" />
+                <span asp-validation-for="Student.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student.EnrollmentYear" class="control-label"></label>
+                <input asp-for="Student.EnrollmentYear" class="form-control" />
+                <span asp-validation-for="Student.EnrollmentYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student.GPA" class="control-label"></label>
+                <input asp-for="Student.GPA" class="form-control" />
+                <span asp-validation-for="Student.GPA" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @Html.DropDownList("Subject", Model.Subjects)
+            </div>
+            <button id="addSubject">Add subject</button>
+
+            <table id="subjects">
+                <thead>
+                    <tr>
+                        <th>Subject Id</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+    <script>
+
+    $("#addSubject").click(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '@Url.Action("AddSubject", "Student")',
+            data: {
+                num: $('#subjects tbody tr').length,
+                subjectId: $('select').val()
+            },
+            success: function(result){
+                $('#subjects tbody').append(result)
+            }
+        })
+    });
+    </script>
+}

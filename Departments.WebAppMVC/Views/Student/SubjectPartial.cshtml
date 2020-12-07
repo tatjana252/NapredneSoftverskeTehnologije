@@ -1,0 +1,10 @@
+﻿@model SubjectPartialViewModel
+<tr>
+    <td>
+        <input name="Student.EnrolledSubjects[@Model.Num].SubjectId" value="@Model.SubjectId" hidden />
+        @(Model.Num + 1)
+    </td>
+    <td>
+        @Model.Name
+    </td>
+</tr>

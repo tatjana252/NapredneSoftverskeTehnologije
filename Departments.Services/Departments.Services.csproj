@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\Departments.Domain.csproj" />
+    <ProjectReference Include="..\Data\Departments.Data.csproj" />
+    <ProjectReference Include="..\Departments.Dtos\Departments.Dtos.csproj" />
+  </ItemGroup>
+
+</Project>

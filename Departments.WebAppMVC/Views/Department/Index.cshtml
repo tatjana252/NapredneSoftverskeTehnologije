@@ -1,0 +1,36 @@
+﻿@model List<Departments.Domain.Department>
+
+<h1> Departments: </h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+
+            @foreach (var d in Model)
+            {
+                @Html.Partial("DepartmentPartial", d);
+            }
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+
+<script>
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/departmentshub").build();
+
+    connection.on("UpdateDepartments", department => { alert("UpdateDepartments" + department.departmentId); })
+
+    connection.start();
+
+
+</script>
+}
